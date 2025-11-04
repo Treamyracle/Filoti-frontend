@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Fungsi untuk mengambil username dari backend
     async function fetchAdminUsername() {
         try {
-            const response = await fetch('https://filoti-backend.vercel.app/me', {
+            const response = await fetch('https://filoti-backend.vercel.app/api/me', {
                 method: 'GET',
                 credentials: 'include'
             });
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             await fetchAdminUsername(); // Ambil username admin dulu
 
-            const response = await fetch('https://filoti-backend.vercel.app/posts', {
+            const response = await fetch('https://filoti-backend.vercel.app/api/posts', {
                 method: 'GET',
                 credentials: 'include'
             });

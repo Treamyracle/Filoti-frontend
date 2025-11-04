@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
 
         try {
-            const response = await fetch('https://filoti-backend.vercel.app/notifications', {
+            const response = await fetch('https://filoti-backend.vercel.app/api/notifications', {
                 method: 'GET',
                 credentials: 'include' // Tetap sertakan credentials jika middleware Anda membutuhkannya
             });

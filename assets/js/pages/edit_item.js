@@ -78,7 +78,7 @@ const navbarContainer = document.querySelector('#navbar-container');
     // Fungsi untuk memuat data item dari backend
     async function loadItemData() {
         try {
-            const response = await fetch(`https://filoti-backend.vercel.app/posts/${itemId}`, {
+            const response = await fetch(`https://filoti-backend.vercel.app/api/posts/${itemId}`, {
                 method: 'GET',
                 credentials: 'include'
             });
@@ -137,7 +137,7 @@ const navbarContainer = document.querySelector('#navbar-container');
         }
 
         try {
-            const response = await fetch(`https://filoti-backend.vercel.app/posts/${itemId}`, {
+            const response = await fetch(`https://filoti-backend.vercel.app/api/posts/${itemId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -208,7 +208,7 @@ const navbarContainer = document.querySelector('#navbar-container');
         };
 
         try {
-            const response = await fetch(`https://filoti-backend.vercel.app/posts/${itemId}/done`, {
+            const response = await fetch(`https://filoti-backend.vercel.app/api/posts/${itemId}/done`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -237,7 +237,7 @@ const navbarContainer = document.querySelector('#navbar-container');
 
         if (isConfirmed) {
             try {
-                const response = await fetch(`https://filoti-backend.vercel.app/posts/${itemId}`, {
+                const response = await fetch(`https://filoti-backend.vercel.app/api/posts/${itemId}`, {
                     method: 'DELETE',
                     credentials: 'include'
                 });

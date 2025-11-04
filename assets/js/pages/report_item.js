@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
     async function validateSession() {
         try {
             console.log("REPORT_ITEM_JS: Memvalidasi sesi...");
-            const response = await fetch('https://filoti-backend.vercel.app/me', {
+            const response = await fetch('https://filoti-backend.vercel.app/api/me', {
                 method: 'GET',
                 credentials: 'include'
             });
@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("REPORT_FORM: Mengirim data post:", postData);
 
         try {
-            const response = await fetch('https://filoti-backend.vercel.app/posts', {
+            const response = await fetch('https://filoti-backend.vercel.app/api/posts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
