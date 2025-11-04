@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let navbarPath = '../components/navbar_guest.html'; // Default ke Guest Navbar
 
             try {
-                const response = await fetch('https://filoti-backend.vercel.app/me', { // Panggil endpoint /me
+                const response = await fetch('https://filoti-backend.vercel.app/api/me', { // Panggil endpoint /me
                     method: 'GET',
                     credentials: 'include'
                 });
