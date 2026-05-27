@@ -27,89 +27,82 @@
         .sidebar {
             transition: transform 0.3s ease-in-out;
         }
-        /* Class ini tidak digunakan lagi secara dinamis oleh JS di sini, 
-           tapi tetap bisa ada jika Anda menggunakannya di tempat lain. */
         .hidden-guest { 
             display: none !important;
         }
     </style>
 </head>
 <body>
-    <nav class="hidden lg:flex bg-white shadow-sm px-6 py-4 items-center justify-between sticky top-0 z-40">
+    <nav class="hidden lg:flex bg-white/80 backdrop-blur-lg border-b border-gray-100 shadow-sm px-6 py-4 items-center justify-between sticky top-0 z-40 transition-all duration-300">
         <div class="flex items-center space-x-4">
-            <div class="flex items-center space-x-2">
-                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-green-500 rounded-lg flex items-center justify-center overflow-hidden">
-                    <img src="../assets/img/logo_filoti.png" alt="Logo" class="w-full h-full object-cover" />
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-green-400 rounded-xl flex items-center justify-center shadow-md shadow-blue-500/20 overflow-hidden">
+                    <img src="../assets/img/logo_filoti.png" alt="Logo" class="w-full h-full object-cover" onerror="this.style.display='none'"/>
                 </div>
                 <div>
-                    <h1 class="text-xl font-bold text-gray-800">FILOTI</h1>
-                    <p class="text-sm text-gray-600">Student Lost and Found Application</p>
+                    <h1 class="text-xl font-bold text-slate-800 tracking-tight">FILOTI</h1>
+                    <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Student Lost and Found</p>
                 </div>
             </div>
         </div>
-        <div class="flex items-center space-x-6">
+        <div class="flex items-center space-x-1">
 
-            <a href="lost_item" class="nav-link text-gray-700 hover:text-blue-600 transition-colors" data-page="lost-items">Lost Items</a>
-            <a href="find_item" class="nav-link text-gray-700 hover:text-blue-600 transition-colors" data-page="found-items">Found Items</a>
+            <a href="lost_item" class="nav-link px-4 py-2 text-sm font-medium rounded-lg text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all" data-page="lost-items">Lost Items</a>
+            <a href="find_item" class="nav-link px-4 py-2 text-sm font-medium rounded-lg text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all" data-page="found-items">Found Items</a>
             
-            <a href="notification" class="nav-link text-gray-700 hover:text-blue-600 transition-colors" data-page="notification">Notification</a>
+            <a href="notification" class="nav-link px-4 py-2 text-sm font-medium rounded-lg text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all" data-page="notification">Notification</a>
             
-            <button id="desktop-auth-button" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                Login
-            </button>
+            <div class="pl-2 border-l border-slate-200 ml-2">
+                <button id="desktop-auth-button" class="ml-2 bg-blue-600 text-white text-sm font-semibold px-5 py-2 rounded-xl hover:bg-blue-700 hover:shadow-md hover:shadow-blue-500/20 transition-all active:scale-95">
+                    Login
+                </button>
+            </div>
         </div>
     </nav>
 
-    <header class="lg:hidden bg-white shadow-sm px-4 py-3 flex items-center justify-between sticky top-0 z-40">
+    <header class="lg:hidden bg-white/80 backdrop-blur-lg border-b border-gray-100 shadow-sm px-4 py-3 flex items-center justify-between sticky top-0 z-40">
         <div class="flex items-center space-x-3">
-            <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-green-500 rounded-lg flex items-center justify-center">
-                <img src="../assets/img/logo_filoti.png" alt="Logo" class="w-full h-full object-cover rounded-lg" />
+            <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-green-400 rounded-xl flex items-center justify-center shadow-sm overflow-hidden">
+                <img src="../assets/img/logo_filoti.png" alt="Logo" class="w-full h-full object-cover" onerror="this.style.display='none'"/>
             </div>
             <div>
-                <h1 class="text-lg font-bold text-gray-800">FILOTI</h1>
-                <p class="text-xs text-gray-600">Student Lost and Found Application</p>
+                <h1 class="text-lg font-bold text-slate-800 tracking-tight">FILOTI</h1>
             </div>
         </div>
 
         <div class="flex items-center space-x-3">
-            <button class="p-2 bg-gray-100 rounded-full">
-                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-            </button>
-
-            <button id="menu-toggle" class="p-2 bg-orange-500 rounded-full">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button id="menu-toggle" class="p-2 bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-800 rounded-lg transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
         </div>
     </header>
 
-    <div id="sidebar-overlay" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-50 opacity-0 invisible sidebar-overlay">
-        <div id="sidebar" class="sidebar fixed right-0 top-0 h-full w-80 bg-white shadow-lg transform translate-x-full custom-scrollbar overflow-y-auto">
+    <div id="sidebar-overlay" class="lg:hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 opacity-0 invisible sidebar-overlay">
+        <div id="sidebar" class="sidebar fixed right-0 top-0 h-full w-[280px] bg-white shadow-2xl transform translate-x-full custom-scrollbar overflow-y-auto">
             <div class="p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl font-bold text-gray-800">Menu</h2>
-                    <button id="close-sidebar" class="p-2 hover:bg-gray-100 rounded-full">
-                        <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-lg font-bold text-slate-800">Menu</h2>
+                    <button id="close-sidebar" class="p-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
 
-                <nav class="space-y-4">
-                    <a href="lost_item" class="mobile-nav-link block py-3 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors" data-page="lost-items">
+                <nav class="space-y-2">
+                    <a href="lost_item" class="mobile-nav-link flex items-center py-3 px-4 text-sm font-medium text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded-xl transition-colors" data-page="lost-items">
                         Lost Items
                     </a>
-                    <a href="find_item" class="mobile-nav-link block py-3 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors" data-page="found-items">
+                    <a href="find_item" class="mobile-nav-link flex items-center py-3 px-4 text-sm font-medium text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded-xl transition-colors" data-page="found-items">
                         Found Items
                     </a>
-                    <a href="notification" class="mobile-nav-link block py-3 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors" data-page="notification">
+                    <a href="notification" class="mobile-nav-link flex items-center py-3 px-4 text-sm font-medium text-slate-600 hover:bg-blue-50 hover:text-blue-600 rounded-xl transition-colors" data-page="notification">
                         Notification
                     </a>
-                    <div class="pt-4 border-t border-gray-200">
-                        <button id="mobile-auth-button" class="w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors">
+                    <div class="pt-6 mt-4 border-t border-slate-100">
+                        <button id="mobile-auth-button" class="w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-xl hover:bg-blue-700 hover:shadow-md hover:shadow-blue-500/20 transition-all active:scale-95">
                             Login
                         </button>
                     </div>
@@ -131,7 +124,6 @@
                 this.handleResize();
                 this.setActiveNavigation();
                 this.updateAuthUI();
-                // updateNavigationLinks TIDAK DIPERLUKAN di sini karena strukturnya statis untuk guest
                 
                 window.addEventListener("resize", () => this.handleResize());
             }
@@ -145,9 +137,6 @@
 
                     if (response.ok) {
                         this.currentUser = await response.json();
-                        // Jika ternyata user login sebagai admin setelah navbar guest dimuat (misal, refresh halaman),
-                        // maka navigasi halaman akan memuat navbar_admin di halaman berikutnya.
-                        // Di sini, kita hanya perlu tahu statusnya untuk tombol Login/Logout.
                     } else {
                         this.currentUser = { id: null, username: "Guest", is_admin: false };
                     }
@@ -161,27 +150,22 @@
                 const desktopAuthButton = document.getElementById('desktop-auth-button');
                 const mobileAuthButton = document.getElementById('mobile-auth-button');
 
-                if (this.currentUser && this.currentUser.id) { // User login (bisa admin atau user biasa)
-                    // Jika user login, tombol harus menjadi Logout
+                if (this.currentUser && this.currentUser.id) { 
                     if (desktopAuthButton) {
                         desktopAuthButton.textContent = 'Logout';
                         desktopAuthButton.onclick = () => this.logout();
-                        desktopAuthButton.classList.remove('bg-blue-600', 'hover:bg-blue-700');
-                        desktopAuthButton.classList.add('bg-red-600', 'hover:bg-red-700');
+                        desktopAuthButton.className = 'ml-2 bg-rose-50 text-rose-600 text-sm font-semibold px-5 py-2 rounded-xl hover:bg-rose-100 hover:text-rose-700 transition-all active:scale-95';
                     }
                     if (mobileAuthButton) {
                         mobileAuthButton.textContent = 'Logout';
                         mobileAuthButton.onclick = () => this.logout();
-                        mobileAuthButton.classList.remove('bg-blue-600', 'hover:bg-blue-700');
-                        mobileAuthButton.classList.add('bg-red-600', 'hover:bg-red-700');
+                        mobileAuthButton.className = 'w-full bg-rose-50 text-rose-600 font-semibold py-3 px-4 rounded-xl hover:bg-rose-100 transition-all active:scale-95';
                     }
-                } else { // User belum login (memang guest)
-                    // Tombol sudah Login secara default di HTML, hanya perlu pastikan onclick-nya benar
+                } else { 
                     if (desktopAuthButton) {
                         desktopAuthButton.textContent = 'Login';
                         desktopAuthButton.onclick = () => window.location.href = 'login';
-                        desktopAuthButton.classList.remove('bg-red-600', 'hover:bg-red-700'); // Pastikan warna default
-                        desktopAuthButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                        desktopAuthButton.className = 'ml-2 bg-blue-600 text-white text-sm font-semibold px-5 py-2 rounded-xl hover:bg-blue-700 hover:shadow-md hover:shadow-blue-500/20 transition-all active:scale-95';
                     }
                     if (mobileAuthButton) {
                         mobileAuthButton.textContent = 'Login';
@@ -189,8 +173,7 @@
                             window.location.href = 'login';
                             this.closeSidebar();
                         };
-                        mobileAuthButton.classList.remove('bg-red-600', 'hover:bg-red-700'); // Pastikan warna default
-                        mobileAuthButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                        mobileAuthButton.className = 'w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-xl hover:bg-blue-700 hover:shadow-md hover:shadow-blue-500/20 transition-all active:scale-95';
                     }
                 }
             }
@@ -216,16 +199,12 @@
                 }
             }
 
-            // updateNavigationLinks TIDAK LAGI DIBUTUHKAN
-            // karena HTML navbar sudah terpisah berdasarkan peran dan tidak ada elemen yang perlu disembunyikan/ditampilkan secara dinamis.
-
             setupMobileSidebar() {
                 const menuToggle = document.getElementById("menu-toggle");
                 const closeSidebar = document.getElementById("close-sidebar");
                 const sidebarOverlay = document.getElementById("sidebar-overlay");
                 const sidebar = document.getElementById("sidebar");
 
-                // Penting: Lakukan pengecekan elemen
                 if (!menuToggle) { console.error("Menu toggle button not found!"); return; }
                 if (!closeSidebar) { console.error("Close sidebar button not found!"); return; }
                 if (!sidebarOverlay) { console.error("Sidebar overlay not found!"); return; }
@@ -245,39 +224,36 @@
                         this.closeSidebar();
                     }
                 });
-                console.log("Mobile sidebar setup complete.");
             }
 
             openSidebar() {
                 const sidebarOverlay = document.getElementById("sidebar-overlay");
                 const sidebar = document.getElementById("sidebar");
                 
-                if (sidebarOverlay) { // Tambahkan pengecekan null
+                if (sidebarOverlay) { 
                     sidebarOverlay.classList.remove("opacity-0", "invisible");
                     sidebarOverlay.classList.add("opacity-100", "visible");
                 }
-                if (sidebar) { // Tambahkan pengecekan null
+                if (sidebar) { 
                     sidebar.classList.remove("translate-x-full");
                     sidebar.classList.add("translate-x-0");
                 }
                 document.body.style.overflow = "hidden";
-                console.log("Sidebar opened.");
             }
 
             closeSidebar() {
                 const sidebarOverlay = document.getElementById("sidebar-overlay");
                 const sidebar = document.getElementById("sidebar");
                 
-                if (sidebarOverlay) { // Tambahkan pengecekan null
+                if (sidebarOverlay) { 
                     sidebarOverlay.classList.add("opacity-0", "invisible");
                     sidebarOverlay.classList.remove("opacity-100", "visible");
                 }
-                if (sidebar) { // Tambahkan pengecekan null
+                if (sidebar) { 
                     sidebar.classList.add("translate-x-full");
                     sidebar.classList.remove("translate-x-0");
                 }
                 document.body.style.overflow = "auto";
-                console.log("Sidebar closed.");
             }
 
             handleResize() {
@@ -287,50 +263,46 @@
             }
 
             setActiveNavigation() {
-                const currentPage = window.location.pathname.split('/').pop();
-                console.log("Current page:", currentPage); // Debugging log
+                const currentPage = window.location.pathname.split('/').pop().replace('.html', '');
                 
                 const pageMap = {
                     'lost_item': 'lost-items',
                     '': 'lost-items',
                     'find_item': 'found-items',
                     'details_item': 'found-items',
-                    'history': 'history', // Tetap ada di map meskipun di navbar guest tidak ditampilkan
+                    'history': 'history', 
                     'history_details': 'history',
                     'history_details_bukti': 'history',
-                    'report_item': 'report-item', // Tetap ada di map meskipun di navbar guest tidak ditampilkan
+                    'report_item': 'report-item', 
                     'notification': 'notification',
                     'edit_item':'report-item'
                 };
 
                 const activePage = pageMap[currentPage] || 'lost-items';
 
-                // Navigasi desktop (querySelectorAll di luar #sidebar)
                 document.querySelectorAll('nav .nav-link').forEach(link => { 
                     const linkPage = link.getAttribute('data-page');
                     if (linkPage === activePage) {
-                        link.classList.remove('text-gray-700');
-                        link.classList.add('text-blue-600');
-                    } else {
-                        link.classList.remove('text-blue-600');
-                        link.classList.add('text-gray-700');
-                    }
-                });
-
-                // Navigasi mobile sidebar (querySelectorAll di dalam #sidebar)
-                document.querySelectorAll('#sidebar .mobile-nav-link').forEach(link => { 
-                    const linkPage = link.getAttribute('data-page');
-                    if (linkPage === activePage) {
-                        link.classList.remove('text-gray-700');
+                        link.classList.remove('text-slate-600');
                         link.classList.add('text-blue-600', 'bg-blue-50');
                     } else {
                         link.classList.remove('text-blue-600', 'bg-blue-50');
-                        link.classList.add('text-gray-700');
+                        link.classList.add('text-slate-600');
+                    }
+                });
+
+                document.querySelectorAll('#sidebar .mobile-nav-link').forEach(link => { 
+                    const linkPage = link.getAttribute('data-page');
+                    if (linkPage === activePage) {
+                        link.classList.remove('text-slate-600');
+                        link.classList.add('text-blue-600', 'bg-blue-50');
+                    } else {
+                        link.classList.remove('text-blue-600', 'bg-blue-50');
+                        link.classList.add('text-slate-600');
                     }
                 });
             }
         }
-        // Pastikan ini adalah baris terakhir di blok script
         window.FilotiNavbar = new FilotiNavbar(); 
     </script>
 </body>

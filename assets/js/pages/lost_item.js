@@ -19,45 +19,53 @@ document.addEventListener("DOMContentLoaded", function () {
     // Fungsi untuk membuat satu elemen item yang akan ditampilkan
     function createItemLost(item, isAdminUser) {
         let buttonHTML = '';
-        let itemMainText = `<h3 class="font-semibold text-gray-800">${item.title}</h3>`; // Default: Hanya judul
+        let itemMainText = `<h3 class="text-lg font-bold text-slate-800 line-clamp-1">${item.title}</h3>`; // Default: Hanya judul
 
         // Logika kondisional: Tampilan berbeda untuk admin vs. guest/non-admin
         if (isAdminUser) {
             // Admin: Tampilkan tombol "View Details" dan "Edit", serta judul + deskripsi lengkap
             buttonHTML = `
-                <div class="flex items-center space-x-2">
-                    <a href="details_item?id=${item.id}" class="bg-blue-900 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-800">View Details</a>
-                    <a href="edit_item?id=${item.id}" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg text-sm hover:bg-gray-300">Edit</a>
+                <div class="flex items-center space-x-2 mt-4 pt-4 border-t border-slate-100">
+                    <a href="details_item?id=${item.id}" class="flex-1 bg-blue-600 text-white text-center font-semibold px-4 py-2.5 rounded-xl text-sm hover:bg-blue-700 hover:shadow-md hover:shadow-blue-500/20 transition-all active:scale-[0.98]">View Details</a>
+                    <a href="edit_item?id=${item.id}" class="bg-slate-100 text-slate-700 text-center font-semibold px-4 py-2.5 rounded-xl text-sm hover:bg-slate-200 transition-all active:scale-[0.98]">Edit</a>
                 </div>
             `;
-            itemMainText = `<h3 class="font-semibold text-gray-800">${item.title}</h3><p class="text-gray-600 text-sm mb-3">${item.keterangan}</p>`;
+            itemMainText = `<h3 class="text-lg font-bold text-slate-800 mb-1">${item.title}</h3><p class="text-slate-500 text-sm mb-4 line-clamp-2">${item.keterangan}</p>`;
         } else {
             // Guest/Non-Admin: Tidak ada tombol "View Details" atau "Edit", hanya judul
             buttonHTML = ''; // Tombol kosong
-            // itemMainText sudah diset ke judul di awal fungsi, tidak perlu diubah lagi
         }
 
-        const defaultAvatarColor = "bg-gray-500";
+        const defaultAvatarColor = "bg-slate-200";
         const usernameDisplay = "admin"; // Selalu tampilkan "admin" di kartu item
 
         return `
-            <div class="bg-white rounded-lg shadow-sm p-4 lg:p-6 flex flex-col lg:flex-row items-start lg:items-center space-y-4 lg:space-y-0 lg:space-x-6">
-                <div class="flex items-start space-x-3 flex-1">
-                    <div class="w-10 h-10 ${defaultAvatarColor} rounded-full flex items-center justify-center flex-shrink-0">
-                        <span class="text-white font-semibold text-sm"></span>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex flex-wrap items-center gap-2 mb-1">
-                            <h3 class="font-semibold text-gray-800">${usernameDisplay}</h3> 
-                            <span class="text-sm text-gray-500">• ${item.timeAgo}</span>
-                            <span class="text-sm text-gray-500">• ${item.ruangan}</span>
-                        </div>
-                        ${itemMainText} 
-                        ${buttonHTML}
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow overflow-hidden flex flex-col group">
+                <!-- Image Area -->
+                <div class="h-48 w-full bg-slate-100 relative overflow-hidden">
+                    <img src="${item.image_url}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'100%\\' height=\\'100%\\'><rect width=\\'100%\\' height=\\'100%\\' fill=\\'%23f1f5f9\\'/><text x=\\'50%\\' y=\\'50%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' font-family=\\'sans-serif\\' font-size=\\'14px\\' fill=\\'%2394a3b8\\'>No Image</text></svg>'"/>
+                    <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-700 shadow-sm border border-white/50 flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        ${item.ruangan}
                     </div>
                 </div>
-                <div class="w-48 lg:w-24 h-36 lg:h-16 flex-shrink-0 m-12">
-                    <img src="${item.image_url}" alt="${item.title}" class="w-full h-full object-cover rounded-lg bg-gray-200" />
+                
+                <!-- Content Area -->
+                <div class="p-5 flex flex-col flex-1">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <div class="w-6 h-6 bg-gradient-to-br from-slate-200 to-slate-300 rounded-full flex items-center justify-center flex-shrink-0 shadow-inner">
+                            <span class="text-slate-600 font-bold text-[10px]">A</span>
+                        </div>
+                        <span class="text-xs font-medium text-slate-600">${usernameDisplay}</span>
+                        <span class="text-slate-300">•</span>
+                        <span class="text-xs font-medium text-slate-500">${item.timeAgo}</span>
+                    </div>
+                    
+                    ${itemMainText}
+                    
+                    <div class="mt-auto">
+                        ${buttonHTML}
+                    </div>
                 </div>
             </div>`;
     }
@@ -99,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
         if (itemsToRender.length === 0) {
-            itemsContainerLost.innerHTML = '<p class="text-center text-gray-500 py-10">Tidak ada item yang cocok dengan filter ini.</p>';
+            itemsContainerLost.innerHTML = '<div class="col-span-full py-12 text-center bg-white rounded-2xl border border-slate-100 border-dashed"><div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-3"><svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg></div><p class="text-slate-500 font-medium">Tidak ada item yang cocok dengan filter ini.</p></div>';
             return;
         }
 
@@ -129,16 +137,20 @@ document.addEventListener("DOMContentLoaded", function () {
         // Tambahkan opsi "Tampilkan Semua Lokasi"
         const allOption = document.createElement('a');
         allOption.href = '#';
-        allOption.className = 'block px-4 py-3 text-gray-700 hover:bg-blue-50 font-semibold';
+        allOption.className = 'block px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-blue-600 rounded-lg mx-1 transition-colors';
         allOption.textContent = 'Tampilkan Semua Lokasi';
         allOption.dataset.location = 'all';
         dropdown.appendChild(allOption);
+
+        const divider = document.createElement('div');
+        divider.className = 'border-t border-slate-100 my-1';
+        dropdown.appendChild(divider);
 
         // Isi dropdown dengan lokasi dari array hardcode
         uniqueLocations.forEach(locName => {
             const option = document.createElement('a');
             option.href = '#';
-            option.className = 'block px-4 py-3 text-gray-700 hover:bg-blue-50';
+            option.className = 'block px-4 py-2 text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600 rounded-lg mx-1 transition-colors';
             option.textContent = locName;
             option.dataset.location = locName;
             dropdown.appendChild(option);
@@ -189,7 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } catch (error) {
             console.error('Error fetching lost items:', error);
             if (itemsContainerLost) {
-                itemsContainerLost.innerHTML = `<p class="text-red-500 text-center">Gagal memuat item hilang. Error: ${error.message}.</p>`;
+                itemsContainerLost.innerHTML = `<div class="col-span-full py-12 text-center bg-red-50 rounded-2xl border border-red-100"><p class="text-red-600 font-medium">Gagal memuat item hilang.</p><p class="text-red-400 text-sm mt-1">${error.message}</p></div>`;
             }
             if (loadingMessage) loadingMessage.classList.add('hidden');
         }
@@ -199,53 +211,41 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchAndInitializeLostItems();
 
     // --- Event Listeners untuk Dropdown Filter ---
-    // Pasang ini setelah fetchAndInitializeLostItems() selesai
-    // untuk memastikan elemen-elemen filter sudah ada di DOM.
-    // Lakukan pengecekan elemen di sini sebelum memasang event listener
-    if (filterBtn && dropdown && filterLabel) { // Pastikan semua elemen filter yang diperlukan ada
+    if (filterBtn && dropdown && filterLabel) {
         filterBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Mencegah event dari mencapai window
-            dropdown.classList.toggle('hidden'); // Toggle visibilitas dropdown
+            e.stopPropagation(); 
+            dropdown.classList.toggle('hidden'); 
         });
 
-        // Menutup dropdown saat klik di luar area dropdown
         window.addEventListener('click', (e) => {
             if (dropdown && !dropdown.classList.contains('hidden') && 
                 !dropdown.contains(e.target) && e.target !== filterBtn && 
-                !filterBtn.contains(e.target)) { // Tambahkan juga cek apakah yang diklik bukan tombol filter itu sendiri
+                !filterBtn.contains(e.target)) { 
                 dropdown.classList.add('hidden');
             }
         });
 
-        // Menangani klik pada opsi dropdown
         dropdown.addEventListener('click', (e) => {
-            e.preventDefault(); // Mencegah perilaku default tautan
-            const selectedLocation = e.target.dataset.location; // Dapatkan nilai lokasi dari data-location
+            e.preventDefault(); 
+            const selectedLocation = e.target.dataset.location; 
             if (selectedLocation) {
-                renderItems(selectedLocation); // Render item berdasarkan lokasi yang dipilih
-                filterLabel.textContent = selectedLocation === 'all' ? 'Filter by Location' : selectedLocation; // Ubah teks tombol filter
-                dropdown.classList.add('hidden'); // Sembunyikan dropdown setelah pilihan
+                renderItems(selectedLocation); 
+                filterLabel.textContent = selectedLocation === 'all' ? 'Filter by Location' : selectedLocation; 
+                dropdown.classList.add('hidden'); 
             }
         });
-        console.log("Filter event listeners attached."); // Log untuk debugging
-    } else {
-        console.warn("Filter buttons or dropdown not found during final setup. Filter functionality may be inactive.");
     }
 
-    // --- Bagian NavbarLoader: Pastikan ini ada di akhir DOMContentLoaded ---
-    // Ini adalah bagian yang mengontrol visibilitas `#navbar-container` di HTML utama.
     const navbarContainer = document.querySelector('#navbar-container'); 
     if (typeof NavbarLoader !== 'undefined' && navbarContainer) { 
         const loader = new NavbarLoader({
-            navbarPath: "../components/navbar_admin.html", // Default path yang diharapkan, akan diganti oleh initDynamicNavbarLoad di navbar_loader.js
+            navbarPath: "../components/navbar_admin.html", 
             onLoad: function () {
-                // Callback ini dipanggil setelah konten navbar disuntikkan ke #navbar-container
                 if (navbarContainer) {
-                    navbarContainer.classList.add('loaded'); // Tampilkan navbar dengan transisi fade-in
+                    navbarContainer.classList.add('loaded'); 
                 }
             },
             onError: function (error) {
-                // Jika gagal memuat navbar, tampilkan pesan error dan tetap tampilkan kontainer
                 console.error('Gagal memuat navbar:', error);
                 if (navbarContainer) {
                     navbarContainer.innerHTML = '<div class="bg-red-100 text-red-700 p-4 text-center">Navigation could not be loaded</div>';
@@ -253,10 +253,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
         });
-        // Panggil loader.loadNavbarSimple(). Ini akan memicu fetch ke /me di navbar_loader.js
-        // untuk menentukan navbar_admin atau navbar_guest yang akan dimuat.
         loader.loadNavbarSimple(); 
-    } else {
-        console.log("NavbarLoader global mungkin sudah bekerja, atau #navbar-container tidak ditemukan.");
     }
-}); // Penutup DOMContentLoaded
+});
